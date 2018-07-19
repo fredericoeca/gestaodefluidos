@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repControlePorDataSetor" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="db0b5435-099f-4a2d-825e-5f5a9b8f6dde">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Crosstab Data Text" hAlign="Center"/>
+	<style name="style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_concentracao}.doubleValue() < $F{ctr_conmin}.doubleValue()]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_concentracao}.doubleValue() > $F{ctr_conmax}.doubleValue()]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="style2">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_ph}.doubleValue() < $F{ctr_phmin}.doubleValue()]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_ph}.doubleValue() > $F{ctr_phmax}.doubleValue()]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="style3">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_contaminacao_visual}.equals("Sim")]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="style4">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_nivel_reservatorio}.equals("Mínimo")]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<style name="style5">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{ctr_skimmer}.equals("Off")]]></conditionExpression>
+			<style forecolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="data" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="setor" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT c.ctr_id, c.ctr_codigo, e.equ_tag, cl.cli_nome, c.ctr_data, c.ctr_concentracao, c.ctr_ph, c.ctr_contaminacao_visual, c.ctr_nivel_reservatorio, c.ctr_skimmer, u.usu_nome, u.usu_celular, u.usu_email, e.equ_con_minima, e.equ_con_maxima, e.equ_limite_max_ph, e.equ_limite_min_ph, c.ctr_conmin, c.ctr_conmax, c.ctr_phmin, c.ctr_phmax, s.set_setor
+FROM controle_fluido AS c
+INNER JOIN equipamento AS e ON c.ctr_equipamento = e.equ_id
+INNER JOIN cliente AS cl ON e.equ_cliente = cl.cli_id
+INNER JOIN usuario AS u ON cl.cli_usuario = u.usu_id
+INNER JOIN equipamento_setor AS es ON es.es_equipamento = e.equ_id
+INNER JOIN setor AS s ON s.set_id = es.es_setor
+WHERE c.ctr_data = $P{data} AND es.es_setor = $P{setor};]]>
+	</queryString>
+	<field name="ctr_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_codigo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_tag" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cli_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_concentracao" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_ph" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_contaminacao_visual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_nivel_reservatorio" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_skimmer" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_con_minima" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_con_maxima" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_limite_max_ph" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_limite_min_ph" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_conmin" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_conmax" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_phmin" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ctr_phmax" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="set_setor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="12" width="253" height="25" forecolor="#006600" uuid="ed972984-dc97-4a61-9e37-5144cf7d0de4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Gestão de Fuidos por data]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="42" width="524" height="1" forecolor="#CCCCCC" uuid="39efba4a-e996-42bb-81f0-81383a027679"/>
+			</line>
+			<image>
+				<reportElement x="405" y="2" width="130" height="43" uuid="c6c8a27b-ce5a-423d-8545-71864cfb95d5"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="5" width="42" height="20" uuid="091d42c5-eefb-44fa-9c49-496c16ffe036"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="66" y="5" width="285" height="20" uuid="a718e247-e530-4373-a29b-52f0a0cb6142"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cli_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="389" y="5" width="29" height="20" uuid="774c80b4-3f67-4e5f-bae2-e85b88054a86"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Data:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="423" y="5" width="100" height="20" uuid="7b9c8529-2b77-46cf-84c1-16518b0c7372"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="66" y="32" width="136" height="20" uuid="75275b60-0cfc-4aa4-8513-7265296f4d51"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{set_setor}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="18" y="32" width="42" height="20" uuid="990c0b7d-203d-4a74-86b5-f7b0432cb3ed"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Setor:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="16" y="55" width="524" height="1" forecolor="#CCCCCC" uuid="5a1043e9-915a-48a9-9c53-981b3cdf8c94"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<rectangle>
+				<reportElement x="19" y="5" width="309" height="20" forecolor="#E3E3E3" uuid="1998c583-ffd5-4bd6-a811-cf259bdffd60"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="155" y="5" width="35" height="20" uuid="88a7be34-6271-40b6-b1b6-86af5d040039"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Conc.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="5" width="31" height="20" uuid="b69e8fd4-0b14-499f-ba99-c8b14e3892b9"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ph]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="5" width="38" height="20" uuid="dcf82005-9030-4a60-bebb-afae9f8cb5b1"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cont.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="259" y="5" width="45" height="20" uuid="8b36da57-db38-4549-8aa6-6a6f2e2d2258"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nivel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="304" y="5" width="23" height="20" uuid="a0de8680-d90d-49bc-9fa3-27a6cd7e8b25"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ski.]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="329" y="5" width="209" height="20" forecolor="#E3E3E3" backcolor="#E3E3E3" uuid="1e5671e5-cb54-4380-8702-bd5d2fd2105f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="333" y="5" width="58" height="20" uuid="eb0b74f1-ac70-40dc-9e47-14371c7a5b3a"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="496" y="5" width="44" height="20" uuid="8ce497b6-4c3b-4e3a-b98e-e8766f1d1315"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Qtde(lts)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="394" y="5" width="89" height="20" uuid="aa031a1f-69a6-4629-9ed6-e25f75353087"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="76" y="5" width="79" height="20" uuid="3bb57074-2b7f-414d-b29f-b1c9aa949a13"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Equipamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="19" y="5" width="57" height="20" uuid="d6a26fbb-2726-4721-b7ca-2e42874c0ea0"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<line>
+				<reportElement x="17" y="1" width="524" height="1" forecolor="#E3E3E3" uuid="0cf10d1e-9bcf-4f0b-a010-c334c48deb4d"/>
+			</line>
+			<textField pattern="###0.0">
+				<reportElement style="style1" x="155" y="2" width="35" height="20" uuid="6003fbfd-f392-4679-9f70-585abd489fb3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_concentracao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement style="style2" x="190" y="2" width="31" height="20" uuid="45399df6-c21d-48b3-8c02-5c4f0e79cbc0"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_ph}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style3" x="221" y="2" width="38" height="20" uuid="002bdd27-3831-4a06-8cae-6c88fbd9faa4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_contaminacao_visual}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style4" x="259" y="2" width="45" height="20" uuid="1bca6448-6ac7-4dc1-85e2-98d1e0ddc869"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_nivel_reservatorio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style5" mode="Transparent" x="304" y="2" width="23" height="20" uuid="1d303ea9-d495-4351-9e14-9d644ba511f1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ctr_skimmer}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="333" y="2" width="204" height="21" uuid="932985e2-fb52-4db9-93ec-2904896af90d"/>
+				<subreportParameter name="controle">
+					<subreportParameterExpression><![CDATA[$F{ctr_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "repContDataSetor_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<textField>
+				<reportElement x="76" y="2" width="79" height="20" uuid="447a6319-655d-47db-b49f-432ff11972b8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_tag}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="19" y="2" width="57" height="20" uuid="18540fac-2c23-47a4-af6d-0b31d617390e"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ctr_codigo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="58" splitType="Stretch">
+			<textField>
+				<reportElement x="24" y="37" width="207" height="20" uuid="7c81baf7-6739-487e-aaa5-54d41917387a"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="37" width="108" height="20" uuid="fedb47ab-28fa-46b5-935b-70c6c80ae83c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="37" width="197" height="20" uuid="8baecacb-32c7-4e5f-8501-acacdb43c4f6"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_email}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="24" y="5" width="503" height="26" uuid="79170945-788b-4bad-aafb-e6d065cb012d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Conc.: Concentração medida; Ph: Ph medido; Cont.:Contaminação visual; Nivel: Nível verificado no reservatório; Ski.: Skimmer; Produto: Produto usado na correção;  Quantidade.: Quantidade de produto usado na correção. ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="19" y="4" width="524" height="1" forecolor="#E3E3E3" uuid="c0350780-d4b9-4ecb-a30d-31037f13cfb2"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="437" y="12" width="100" height="20" uuid="4fae1004-9372-4bdb-bb61-0d0f7e1b102b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="24" y="12" width="261" height="20" uuid="e896ac23-e0f0-478b-87df-0da8ac0df4eb"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="18" y="-22" width="524" height="1" forecolor="#E3E3E3" uuid="b837c48f-3795-4df7-bffb-1b2bdfbadbc6"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="796" splitType="Stretch">
+			<rectangle>
+				<reportElement x="19" y="433" width="513" height="20" forecolor="#E3E3E3" uuid="165e53ab-b730-401d-b811-9ca49a81879f"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="19" y="26" width="513" height="20" forecolor="#E3E3E3" uuid="8ca88ce0-3565-4fad-8531-b4acb2c08a13"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="23" y="25" width="500" height="20" uuid="663f92a3-b46a-4767-8d9f-b66953541702"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico de Concentrações por Equipamento]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="432" width="500" height="20" uuid="3f7d94ec-14db-4e8e-8e7b-d407423433c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico de Ph por Equipamento]]></text>
+			</staticText>
+			<multiAxisChart>
+				<chart>
+					<reportElement isPrintRepeatedValues="false" x="15" y="64" width="527" height="329" uuid="c9ebb5c6-cbb0-4a4b-9cd8-262a194de0af"/>
+					<chartTitle position="Top"/>
+					<chartSubtitle/>
+					<chartLegend position="Bottom"/>
+				</chart>
+				<multiAxisPlot>
+					<plot labelRotation="90.0">
+						<seriesColor seriesOrder="0" color="#FF0000"/>
+						<seriesColor seriesOrder="1" color="#FF0000"/>
+						<seriesColor seriesOrder="2" color="#009900"/>
+					</plot>
+					<axis position="leftOrTop">
+						<lineChart>
+							<chart>
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="a0a02022-ee43-4e5b-8247-ad9ec3687c12"/>
+								<chartTitle position="Top" color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF" position="Bottom"/>
+							</chart>
+							<categoryDataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Mínimo"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_conmin}]]></valueExpression>
+								</categorySeries>
+								<categorySeries>
+									<seriesExpression><![CDATA["Máximo"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_conmax}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot isShowShapes="true">
+								<plot labelRotation="90.0">
+									<seriesColor seriesOrder="0" color="#FF0000"/>
+									<seriesColor seriesOrder="1" color="#FF0000"/>
+								</plot>
+								<categoryAxisFormat labelRotation="90.0">
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat/>
+								</valueAxisFormat>
+								<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+								<rangeAxisMaxValueExpression><![CDATA[$F{ctr_conmax} + 2]]></rangeAxisMaxValueExpression>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis position="rightOrBottom">
+						<barChart>
+							<chart>
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="a8a898a7-1d30-499b-af53-a3d21cbd615f"/>
+								<chartTitle position="Top" color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF" position="Bottom"/>
+							</chart>
+							<categoryDataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Concentração"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_concentracao}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<barPlot>
+								<plot labelRotation="90.0">
+									<seriesColor seriesOrder="0" color="#33CC00"/>
+								</plot>
+								<itemLabel/>
+								<categoryAxisFormat labelRotation="90.0">
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat/>
+								</valueAxisFormat>
+								<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+								<rangeAxisMaxValueExpression><![CDATA[$F{ctr_conmax} + 2]]></rangeAxisMaxValueExpression>
+							</barPlot>
+						</barChart>
+					</axis>
+				</multiAxisPlot>
+			</multiAxisChart>
+			<multiAxisChart>
+				<chart>
+					<reportElement x="15" y="470" width="527" height="312" uuid="a9538a63-4420-429a-b539-4fb6acbd111b"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<multiAxisPlot>
+					<plot/>
+					<axis position="leftOrTop">
+						<lineChart>
+							<chart>
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="10534bab-2ff0-4fb1-bb02-d3f637e31449"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Mínimo"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_phmin}]]></valueExpression>
+								</categorySeries>
+								<categorySeries>
+									<seriesExpression><![CDATA["Máximo"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_phmax}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<linePlot isShowShapes="true">
+								<plot labelRotation="90.0">
+									<seriesColor seriesOrder="0" color="#FF0000"/>
+									<seriesColor seriesOrder="1" color="#FF0000"/>
+								</plot>
+								<categoryAxisFormat labelRotation="90.0">
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat/>
+								</valueAxisFormat>
+								<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+								<rangeAxisMaxValueExpression><![CDATA[$F{ctr_phmax} + 2]]></rangeAxisMaxValueExpression>
+							</linePlot>
+						</lineChart>
+					</axis>
+					<axis position="rightOrBottom">
+						<barChart>
+							<chart>
+								<reportElement x="0" y="0" width="0" height="0" backcolor="#FFFFFF" uuid="d3c61342-f9b0-4fb1-93e4-0c002dd546aa"/>
+								<chartTitle color="#000000"/>
+								<chartSubtitle color="#000000"/>
+								<chartLegend textColor="#000000" backgroundColor="#FFFFFF"/>
+							</chart>
+							<categoryDataset>
+								<categorySeries>
+									<seriesExpression><![CDATA["Ph"]]></seriesExpression>
+									<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+									<valueExpression><![CDATA[$F{ctr_ph}]]></valueExpression>
+								</categorySeries>
+							</categoryDataset>
+							<barPlot>
+								<plot labelRotation="90.0">
+									<seriesColor seriesOrder="0" color="#33CC00"/>
+								</plot>
+								<itemLabel/>
+								<categoryAxisFormat labelRotation="90.0">
+									<axisFormat/>
+								</categoryAxisFormat>
+								<valueAxisFormat>
+									<axisFormat/>
+								</valueAxisFormat>
+								<rangeAxisMinValueExpression><![CDATA[0]]></rangeAxisMinValueExpression>
+								<rangeAxisMaxValueExpression><![CDATA[$F{ctr_phmax} + 2]]></rangeAxisMaxValueExpression>
+							</barPlot>
+						</barChart>
+					</axis>
+				</multiAxisPlot>
+			</multiAxisChart>
+		</band>
+	</summary>
+</jasperReport>

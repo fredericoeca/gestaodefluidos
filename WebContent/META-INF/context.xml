@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/PoolConexao">
+		   
+    <Resource 
+		auth="Container"
+		driverClassName="com.mysql.jdbc.Driver"
+	    maxActive="300" maxldle="40" maxWait="30000"
+	    name = "jdbc/gestao_fluido"
+	    type="javax.sql.DataSource"
+	    url="jdbc:mysql://gestao-fluido.mysql.uhserver.com:3306/gestao_fluido?autoReconnect=true"
+	    username="gestaodefluido"
+	    password="gfal02@" 
+	    validationQuery = "select current_date"
+		removeAbandoned = "true" 
+		removeAbandonedTimeout = "30" 
+		logAbandoned = "true"
+    />
+     
+</Context>

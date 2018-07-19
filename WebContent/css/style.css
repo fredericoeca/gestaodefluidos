@@ -1,0 +1,619 @@
+
+/*
+* Sistema de Gest�o de Fluidos
+* All Lubrificantes
+* Arquivos de estilos
+* .css
+* autor: Frederico E. Cabral Araujo
+*/
+
+/* Nav > Link > active */
+
+#link-main{
+	background-color: #47A596;
+}
+
+a.nav-link{
+	color: #47A596;
+}
+
+a.nav-link:hover{
+	color: #F5D832;
+}
+
+#link{
+	color: #000000;
+}
+
+a:hover#link{
+	color: #47A596;
+}
+
+/* Login */
+.panel-success{
+    position: absolute;
+    width: 360px;
+    height: 400px;
+    position: absolute;
+    top: 0; 
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    margin: auto;
+}
+
+.panel-success .panel-heading{
+    font-size: 16px;
+    font-weight: bold;
+    padding-right: 2px;
+}
+    
+.panel-success .panel-heading .col-md-4{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    text-align: center;
+    float: right;
+    padding-right: 5px;
+    font-weight: normal;
+    padding-top: 10px;
+}
+
+.panel-success .panel-body{
+    padding-top: 40px;
+}
+
+.panel-success .panel-body .form-group{
+    margin: 0 auto; 
+}
+
+label.control-label.col-lg-2{
+    font-size: 12px;
+    padding-top: 15px;
+    text-align: left;   
+}
+
+.col-sm-1{
+    width: 100%;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.btn.btn-success{
+    margin-left: 5px;
+    margin-right: 5px;        
+}
+
+.alerta-login{
+    position: relative;
+    width: 400px;
+    top: 50px; 
+    bottom: 0;
+    left: 0; 
+    right: 0;
+    margin: auto;
+}
+
+div.alerta span{
+    font-size: 16px;
+    text-align: center;
+    position: relative;
+}
+    
+div.alerta h5{
+    font-size: 16px;
+    margin-left: 0px;
+}
+
+ul.navbar-nav.right{
+	margin-right: 20px;
+}
+
+h6{
+	margin-top: 25px;
+	margin-left: 15px;
+}
+
+div.form-group{
+	text-align: left!important;
+}
+
+.pt-3{
+	padding-top: 5rem!important;
+}
+
+.footer{
+	
+}
+
+.rodape{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #9C9C9C;
+    font-size: 14px;
+    text-align: center!important;
+}
+
+/* Tabelas */
+.row.usu-tab{
+    padding: 20px;
+}
+
+.usus-tab{
+    border: 1px solid #CFCFCF;
+}
+
+.thead-tab-usu{
+    font-size: 14px;
+}
+
+.tbody-tab-usu{
+    font-size: 14px;
+}
+
+.control-label{
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.dado{
+	margin-left: 30px;
+}
+
+.tab{
+	width: 100%;
+}
+
+.tab-tab{
+    border: 1px solid #CFCFCF;
+    width: 100%;
+	max-height: 300px;
+	overflow: auto;
+}
+
+.tab-tab_1{
+    border: none;
+    width: 100%;
+	max-height: 300px;
+	overflow: auto;
+}
+	
+@media screen and (max-width: 480px) {
+ 
+    #content {
+        width: 100%;
+        height: auto;
+        float: none;
+    }
+    #sidebar {
+        width: auto;
+        float: none;
+    }
+ 
+}
+
+.table td, .table th {
+	/*padding-bottom: 5px;
+	padding-top: 5px;*/
+	padding: .25rem;
+}
+
+.table-striped tbody > tr:nth-child(odd) > td,
+.table-striped tbody > tr:nth-child(odd) > th{
+	background-color: #F5F5F5;
+}
+
+.det-cli{
+	margin-top: 20px;
+	border-radius: 0px;
+}
+
+.det-cli-h{
+	padding: .25rem 1.25rem;
+	color: #006400;
+	font-weight: 400; 
+}
+
+.link-box{
+	color: #228B22;
+}
+
+.link-box:hover{
+	color: #F5D832;
+}
+
+.link-box-new{
+	color: #FF4500;
+}
+
+.id-box{
+	padding-left: 5px;
+	font-size: 12px;
+}
+
+.dado-box{
+	font-size: 14px;	
+}
+
+.dado-box-i{
+	font-size: 14px;
+	border-top: solid 1px #E8E8E8;
+}
+
+.center-top{
+	display: flex;
+    align-items: center; 
+  	height: 40px;
+}
+
+.row{
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.box-cli{
+	border: solid 1px #E8E8E8;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;	
+}
+
+p{
+	padding-left: 5px;
+}
+
+.btn-box{
+	border-top: solid 1px #E8E8E8;
+	font-size: 14px;
+	margin-top: 5px;
+	padding-top: 5px;
+}
+
+.legenda{
+	font-size: 12px;
+}
+
+.div-det{
+	margin-bottom: 3px;
+	padding: 0;
+}
+
+.div-det-hea{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	color: #006400;
+	font-weight: bold;
+	border-top: 1px solid #CFCFCF;
+	border-left: 1px solid #CFCFCF;
+	border-right: 1px solid #CFCFCF;
+	background-color: #F5F5F5;
+}
+
+.div-det-bod{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	border: 1px solid #CFCFCF;
+}
+
+/* radio */
+label.btn span {
+  font-size: 1.1em ;
+}
+
+label input[type="radio"] ~ i.fa.fa-circle-o{
+    color: #828282;    
+    display: inline;
+    font-size: 1.1em;
+}
+label input[type="radio"] ~ i.fa.fa-dot-circle-o{
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-circle-o{
+    display: none;
+}
+label input[type="radio"]:checked ~ i.fa.fa-dot-circle-o{
+    color: #47A596;    
+    display: inline;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+label:hover input[type="radio"] ~ i.fa {
+	color: #47A596;
+	font-weight: bold;
+}
+
+label input[type="checkbox"] ~ i.fa.fa-square-o{
+    color: #828282;    
+    display: inline;
+}
+
+label input[type="checkbox"] ~ i.fa.fa-check-square-o{
+    display: none;
+}
+label input[type="checkbox"]:checked ~ i.fa.fa-square-o{
+    display: none;
+}
+label input[type="checkbox"]:checked ~ i.fa.fa-check-square-o{
+    color: #7AA3CC;    display: inline;
+}
+label:hover input[type="checkbox"] ~ i.fa {
+	color: #7AA3CC;
+}
+
+div[data-toggle="buttons"] label.active{
+    color: #47A596;
+    font-weight: bold;
+}
+
+div[data-toggle="buttons"] label {
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 2em;
+	text-align: left;
+	white-space: nowrap;
+	vertical-align: top;
+	cursor: pointer;
+	background-color: none;
+	border: 0px solid #828282;
+	border-radius: 3px;
+	color: #828282;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+
+div[data-toggle="buttons"] label:hover {
+	color: #47A596;
+	font-weight: bold;
+}
+
+div[data-toggle="buttons"] label:active, div[data-toggle="buttons"] label.active {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+.res-neg{
+	color: #CD0000;
+	font-weight: bold;
+}
+
+.res-pos{
+	color: #228B22;
+	font-weight: bold;	
+}
+
+.res-med{
+	color: #EEC900;
+	font-weight: bold;	
+}
+
+.res-neg-i{
+	color: #CD0000;
+	font-weight: bold;
+}
+
+.res-pos-i{
+	color: #228B22;
+}
+
+.res-med-i{
+	color: #4169E1;
+}
+
+
+.alerta-sucesso {
+	color: #228B22;
+}
+
+.alerta-erro {
+	color: #EE0000;
+}
+
+.btn.btn-success{
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.login{
+	position: relative;
+	top: 40%;
+    transform: translateY(-50%); 
+	/* etc */
+	-webkit-transform: translateY(-50%);
+}
+
+.titulo-login{
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+	color: #228B22;
+	font-weight: bold;
+	margin-top: 15px;
+}
+
+.log-in{
+	max-width: 850px;
+}
+
+.btn-cor{
+	display: inline;
+}
+
+.col-cor{
+	background-color: #E8E8E8; 
+	text-align: center;
+}
+
+.col-cor-rel{
+	background-color: #E8E8E8; 
+}
+
+.report{
+	max-width: 800px;
+}
+
+.right {
+	float:right; 
+	margin-right:2px;
+	clear: both;
+}
+
+#index-card-f{
+	padding: .25rem ;
+}
+
+/*
+ * Imageless CSS3 Treeview with Checkbox Support
+ * @namespace window.AcidJs
+ * @class CSS3Treeview
+ * @version 3.0
+ * @author Martin Ivanov
+ * @url developer website: http://wemakesites.net/
+ * @url developer twitter: https://twitter.com/#!/wemakesitesnet
+ * @url developer blog http://acidmartin.wordpress.com/
+ **/
+ 
+/*
+ * Do you like this solution? Please, donate:
+ * https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QFUHPWJB2JDBS
+ **/
+ 
+.acidjs-css3-treeview,
+.acidjs-css3-treeview *
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+ 
+.acidjs-css3-treeview label[for]::before,
+.acidjs-css3-treeview label span::before
+{
+    content: "\25b6";
+    display: inline-block;
+    margin: 2px 0 0;
+    width: 13px;
+    height: 13px;
+    vertical-align: top;
+    text-align: center;
+    color: #e74c3c;
+    font-size: 8px;
+    line-height: 13px;
+}
+ 
+.acidjs-css3-treeview li ul
+{
+    margin: 0 0 0 22px;
+}
+ 
+.acidjs-css3-treeview *
+{
+    vertical-align: middle;
+}
+ 
+.acidjs-css3-treeview
+{
+    font: normal 11px/16px "Segoe UI", Arial, Sans-serif;
+}
+ 
+.acidjs-css3-treeview li
+{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+ 
+.acidjs-css3-treeview input[type="checkbox"]
+{
+    display: none;
+}
+ 
+.acidjs-css3-treeview label
+{
+    cursor: pointer;
+}
+ 
+.acidjs-css3-treeview label[for]::before
+{
+    -webkit-transform: translatex(-24px);
+    -moz-transform: translatex(-24px);
+    -ms-transform: translatex(-24px);
+    -o-transform: translatex(-24px);
+    transform: translatex(-24px);
+}
+ 
+.acidjs-css3-treeview label span::before
+{
+    -webkit-transform: translatex(16px);
+    -moz-transform: translatex(16px);
+    -ms-transform: translatex(16px);
+    -o-transform: translatex(16px);
+    transform: translatex(16px);
+}
+ 
+.acidjs-css3-treeview input[type="checkbox"][id]:checked ~ label[for]::before
+{
+    content: "\25bc";
+}
+ 
+.acidjs-css3-treeview input[type="checkbox"][id]:not(:checked) ~ ul
+{
+    display: none;
+}
+ 
+.acidjs-css3-treeview label:not([for])
+{
+    margin: 0 8px 0 0;
+}
+ 
+.acidjs-css3-treeview label span::before
+{
+    content: "";
+    border: solid 1px #1375b3;
+    color: #1375b3;
+    opacity: .50;
+}
+ 
+.acidjs-css3-treeview label input:checked + span::before
+{
+    content: "\2714";
+    box-shadow: 0 0 2px rgba(0, 0, 0, .25) inset;
+    opacity: 1;
+}
+
+.box-rep{
+	padding: 2px;
+}
+
+.btn-busca {
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+.btn-refresh {
+	 top: 0;
+	 left: 0;
+	 bottom: 0;
+	 right: 0;
+	 margin: auto;	 
+}
+
+.cal-dia {
+	margin-right: 5px;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 5px;
+	padding-left: 1px;
+    margin-bottom: 2px;
+    border-radius: 0;
+    
+}
+
+.btn-back{
+	padding-left: 0; 
+}

@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ProdutoPorCliente" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6bbce05f-7b3a-4504-ba96-a9c2df62d23e">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_in" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fi" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cl.cli_nome, co.cor_data, p.pro_nome, tp_produto, p.pro_id, SUM(co.cor_quantidade) AS total_qtde, u.usu_nome, u.usu_celular, u.usu_email
+FROM correcao_fluido AS co
+INNER JOIN produto AS p ON p.pro_id = co.cor_produto
+INNER JOIN tipo_produto AS tp ON tp_id = p.pro_tipo
+INNER JOIN controle_fluido AS ct ON ct.ctr_id = co.cor_controle_fluido
+INNER JOIN equipamento AS e ON e.equ_id = ct.ctr_equipamento
+INNER JOIN cliente AS cl ON cl.cli_id = e.equ_cliente
+INNER JOIN usuario AS u ON u.usu_id = cl.cli_usuario
+WHERE cl.cli_id = $P{cliente} AND co.cor_data BETWEEN $P{data_in} AND $P{data_fi}
+GROUP BY p.pro_id]]>
+	</queryString>
+	<field name="cli_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pro_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_produto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pro_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total_qtde" class="java.lang.Double"/>
+	<field name="usu_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="18" y="13" width="253" height="25" forecolor="#006600" uuid="b852f81f-adb3-401a-88e9-b887dea19e44"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consumo de Produtos - Cliente]]></text>
+			</staticText>
+			<line>
+				<reportElement x="17" y="42" width="517" height="1" forecolor="#CCCCCC" uuid="36518130-fae4-411f-ada5-1a2de32e6721"/>
+			</line>
+			<image>
+				<reportElement x="400" y="4" width="130" height="43" uuid="2fb10055-a5e7-4322-aca4-bd6132c07810"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<textField>
+				<reportElement x="61" y="4" width="209" height="20" uuid="476c7dfc-14c1-406d-bf9d-ce9af55917f9"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cli_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="442" y="4" width="21" height="20" uuid="74f38038-a2d1-481e-81f9-a8ea26d5b705"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="464" y="4" width="79" height="20" uuid="89cf8938-5910-4435-a0c8-dbfc4a4607f3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{data_fi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="315" y="4" width="47" height="20" uuid="5782a809-2b95-47bc-9e8e-fab5483f48f3"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="4" width="44" height="20" uuid="d74eff4c-d13d-44cb-8b8c-12337192f620"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente: ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="362" y="4" width="79" height="20" uuid="e471c86b-3281-4966-825e-4dad069667c9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{data_in}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="45" splitType="Stretch">
+			<rectangle>
+				<reportElement x="18" y="2" width="524" height="20" forecolor="#E3E3E3" backcolor="#A0A0A0" uuid="7d11cec4-6512-4e16-b33f-5b3c2cc85c02"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="31" y="2" width="103" height="20" forecolor="#FFFFFF" uuid="19583ede-af36-4401-8e17-b968986d0ee9"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[PRODUTOS]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="24" y="24" width="514" height="20" forecolor="#E3E3E3" backcolor="#FAFAFA" uuid="1a0a0915-b102-4b04-b1c1-1cae9689a994"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="211" y="24" width="224" height="20" forecolor="#666666" uuid="19f1e157-04d4-44c8-9807-56a9c6670cd3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Tipo do Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="27" y="24" width="181" height="20" forecolor="#666666" uuid="67cc484d-e19f-4ce6-a193-45eca1dfa785"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="442" y="24" width="69" height="20" forecolor="#666666" uuid="9936916e-44b8-451d-98dc-86fbaf0f2802"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="443" y="0" width="80" height="20" uuid="c1004945-9fc9-487d-b46a-9a525e3aac93"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_qtde}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="27" y="0" width="180" height="20" uuid="bf557e38-9fd0-43cc-bfb0-9b52acc8961b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pro_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="211" y="0" width="224" height="20" uuid="ea6a0b36-ee8f-4eca-842c-6c0c70553335"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tp_produto}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="26" y="21" width="509" height="1" forecolor="#CCCCCC" uuid="77096a6b-7411-468c-8e25-481f37269945"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="48" splitType="Stretch">
+			<line>
+				<reportElement x="19" y="3" width="513" height="1" forecolor="#CCCCCC" uuid="70299c67-0c1d-4afd-8062-769cc84c61f0"/>
+			</line>
+			<textField>
+				<reportElement x="334" y="4" width="197" height="20" uuid="d014fdd8-cd54-4569-aafc-10b8ff60baec"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_email}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="21" y="26" width="261" height="20" uuid="ce467df5-7361-4d60-83dc-cd0267b0804f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="26" width="100" height="20" uuid="8b3a31b0-ea85-4127-9dc7-9d90b720a40b"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="4" width="108" height="20" uuid="27f22ce1-e957-4908-ba80-35be38d3f94a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_celular}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="4" width="207" height="20" uuid="1eca53c0-3937-4a9c-8888-e0124e53ed91"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="368" splitType="Stretch">
+			<rectangle>
+				<reportElement x="19" y="21" width="511" height="20" forecolor="#E3E3E3" backcolor="#F0F0F0" uuid="f3117f05-ed42-4a9d-8018-0fae90a3220e"/>
+			</rectangle>
+			<barChart>
+				<chart>
+					<reportElement x="18" y="54" width="514" height="304" uuid="ab61c29a-4f62-4d4f-b4ac-4b83ecf3b6ab"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Produtos"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{pro_nome}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_qtde}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot labelRotation="90.0">
+						<seriesColor seriesOrder="0" color="#009900"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="90.0">
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="16" y="20" width="514" height="20" forecolor="#666666" uuid="30cbf7e3-51b1-488c-a6cc-f233aaef04aa"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL DE CONSUMO POR PRODUTO]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

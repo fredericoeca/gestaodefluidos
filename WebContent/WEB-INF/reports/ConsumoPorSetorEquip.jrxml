@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConsumoPorSetorEquip" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="239f76e2-fb9b-480f-9402-c9cf8b28e97b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cliente" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_in" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_fi" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="setor" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\projetos\\prjGestaoDeFluidos\\documents\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT cli.cli_nome, e.equ_id, e.equ_tag, e.equ_tipo, e.equ_fabricante, e.equ_modelo, e.equ_ponto_lubrificacao, u.usu_nome, u.usu_celular, u.usu_email, s.set_setor,SUM(co.cor_quantidade) AS total
+FROM equipamento AS e
+INNER JOIN cliente AS cli ON cli.cli_id = e.equ_cliente
+INNER JOIN usuario AS u ON cli.cli_usuario = u.usu_id
+INNER JOIN controle_fluido AS ct ON e.equ_id = ct.ctr_equipamento
+INNER JOIN correcao_fluido AS co ON ct.ctr_id = co.cor_controle_fluido
+INNER JOIN equipamento_setor AS es ON e.equ_id = es.es_equipamento
+INNER JOIN setor AS s ON s.set_id = es_setor
+WHERE cli.cli_id = $P{cliente} AND s.set_id = $P{setor} AND co.cor_data BETWEEN $P{data_in} AND $P{data_fi}
+GROUP BY equ_tag;]]>
+	</queryString>
+	<field name="cli_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_tag" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_tipo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_fabricante" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_modelo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="equ_ponto_lubrificacao" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_celular" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="usu_email" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="set_setor" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="15" width="253" height="25" forecolor="#006600" uuid="0292f2f2-85b3-4e00-a505-86ddd64378f9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Registro de correções - Equipamentos]]></text>
+			</staticText>
+			<line>
+				<reportElement x="10" y="48" width="524" height="1" forecolor="#CCCCCC" uuid="1837c4af-c4f8-4862-9925-022f2ea11b54"/>
+			</line>
+			<image>
+				<reportElement x="404" y="6" width="130" height="43" uuid="deac7ab0-41a0-4eaa-a5d9-a79faf4eac5e"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="325" y="4" width="47" height="20" uuid="6cc26a3e-1230-4e74-a42a-f20172766d83"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Período:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="26" y="4" width="44" height="20" uuid="fadc97de-0053-4564-bc21-04337905095b"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Cliente: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="4" width="209" height="20" uuid="54907ee3-012a-4b15-8cc4-9117632c97cc"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cli_nome}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="451" y="4" width="21" height="20" uuid="6a381cd8-0cba-44f2-a283-ab1f882299d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[à]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="472" y="4" width="79" height="20" uuid="323d5e32-f5af-4c93-a8d4-c1d53820e125"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{data_fi}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="372" y="4" width="79" height="20" uuid="ef4011fc-8328-43ab-8bf0-98bdf193fe82"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$P{data_in}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="2" width="524" height="20" forecolor="#E3E3E3" backcolor="#A0A0A0" uuid="a563a0db-adc1-4325-8179-00e59fca459f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="26" y="2" width="45" height="20" forecolor="#FFFFFF" uuid="6e33d600-a1bb-4928-92eb-0ec0b15fd709"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+				</textElement>
+				<text><![CDATA[SETOR:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="71" y="2" width="256" height="20" forecolor="#FFFFFF" uuid="c593769f-2fcd-406f-bebc-cc1150c46c28"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{set_setor}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement x="12" y="1" width="524" height="20" forecolor="#E3E3E3" backcolor="#F0F0F0" uuid="4acdc87c-b7bb-4662-b52f-2f8d33e05ca9"/>
+			</rectangle>
+			<textField>
+				<reportElement x="218" y="1" width="88" height="20" uuid="4178d9f0-9e30-4edf-8cea-89c3889475d6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_fabricante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="1" width="75" height="20" uuid="1eb4b9ac-6b7d-43ef-88a0-15004c33350e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_modelo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="1" width="99" height="20" uuid="87ebffc9-33b3-4ecc-84ab-9e7c01a919c3"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_tipo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="20" y="1" width="95" height="20" uuid="07bb1a31-1907-4d3f-91c9-b9fd49fd16cb"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_tag}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="386" y="1" width="150" height="20" uuid="53bac7be-0ad0-4624-be9f-00be3b6f215e"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{equ_ponto_lubrificacao}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="19" y="22" width="514" height="23" uuid="31ea5457-b141-4a22-a708-791e8e97f96b"/>
+				<subreportParameter name="equip">
+					<subreportParameterExpression><![CDATA[$F{equ_id}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="final">
+					<subreportParameterExpression><![CDATA[$P{data_fi}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="inicio">
+					<subreportParameterExpression><![CDATA[$P{data_in}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ConsumoPorClienteEquip_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="225" y="5" width="108" height="20" uuid="3d9a7445-dd61-4c32-a03f-e636a1475ade"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_celular}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="12" y="3" width="524" height="1" forecolor="#E3E3E3" uuid="18843fe8-b08c-4189-b7ea-cf7ecdd75ea1"/>
+			</line>
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement x="17" y="29" width="261" height="20" uuid="115348cd-e3ec-42d3-9392-6fff0910fc33"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="5" width="197" height="20" uuid="739cb2f2-86f2-450e-8441-8d8ff66ad17b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="29" width="100" height="20" uuid="90c046ae-cac8-4d66-a685-6c86544cc634"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="18" y="5" width="207" height="20" uuid="789cc0dc-63c7-48c2-8394-128fbc2f44b1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usu_nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="335" splitType="Stretch">
+			<rectangle>
+				<reportElement x="18" y="18" width="517" height="20" forecolor="#E3E3E3" backcolor="#F0F0F0" uuid="8fcbc289-ce75-4c95-b43a-4d50cfd0cec3"/>
+			</rectangle>
+			<barChart>
+				<chart>
+					<reportElement x="18" y="52" width="518" height="272" uuid="f772568d-596b-413e-aa28-834b6d10bafe"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["Equipamentos"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{equ_tag}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot labelRotation="90.0">
+						<seriesColor seriesOrder="0" color="#009900"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="90.0">
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="19" y="18" width="513" height="20" forecolor="#666666" uuid="fb55164d-d92e-4ea9-bd40-eda87f553da2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL DE CONSUMO POR EQUIPAMNTOS]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

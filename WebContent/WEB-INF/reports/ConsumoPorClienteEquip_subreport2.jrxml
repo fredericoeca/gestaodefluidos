@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ConsumoPorClienteEquip_subreport2" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c774aeff-19eb-4e35-b25e-bd05d0dd1841">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="equip" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="final" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT p.pro_nome, tp.tp_produto, c.cor_data, c.cor_quantidade
+FROM correcao_fluido AS c
+INNER JOIN produto AS p ON c.cor_produto = p.pro_id
+INNER JOIN tipo_produto AS tp ON tp.tp_id = p.pro_tipo
+INNER JOIN controle_fluido AS ct ON ct.ctr_id = cor_controle_fluido
+INNER JOIN equipamento AS e ON ct.ctr_equipamento = e.equ_id
+WHERE equ_id = $P{equip} AND c.cor_data BETWEEN $P{inicio} AND $P{final}
+ORDER BY c.cor_data]]>
+	</queryString>
+	<field name="pro_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tp_produto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_quantidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="21">
+			<rectangle>
+				<reportElement x="3" y="0" width="498" height="20" forecolor="#E3E3E3" backcolor="#FAFAFA" uuid="cd9901c9-3dc2-41b4-94fe-d718f1e684cf"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="3" y="1" width="142" height="20" forecolor="#666666" uuid="729adeb5-c030-4d4b-bbe3-3cea95dff54c"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Produto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="1" width="100" height="20" forecolor="#666666" uuid="152eb1da-4e42-4339-998b-5551fcddffba"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="1" width="68" height="20" forecolor="#666666" uuid="978da9d5-ee3d-4ba3-b66c-28f1eb0361d8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Quantidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="147" y="1" width="184" height="20" forecolor="#666666" uuid="ad0aa598-e384-492b-9fd0-0408e100cb25"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Tipo do Produto]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="3" y="0" width="142" height="20" uuid="1a1f3aa7-4a1e-48f7-8fa7-0d18bae48ea9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pro_nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="331" y="0" width="100" height="20" uuid="6acc7230-3257-4b12-942a-2919f9b74214"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cor_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="431" y="0" width="68" height="20" uuid="72ae1586-3dd7-4a1b-9e8c-03b59a824568"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cor_quantidade}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="2" y="20" width="499" height="1" forecolor="#CCCCCC" uuid="e2a4010c-e232-4060-958f-5081441a5bb9"/>
+			</line>
+			<textField>
+				<reportElement x="147" y="0" width="184" height="20" uuid="84e0315b-b4ea-4ed2-acb6-672d3fe5060d"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tp_produto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

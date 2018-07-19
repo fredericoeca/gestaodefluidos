@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="repEquipPeriodo_subreport1" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="ef5be383-162d-469f-8fea-ed4ab532102a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="controle" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT c.cor_id, p.pro_nome, c.cor_quantidade, c.cor_data, c.cor_laudo
+FROM correcao_fluido AS c INNER JOIN produto AS p ON c.cor_produto = p.pro_id
+WHERE c.cor_controle_fluido = $P{controle}]]>
+	</queryString>
+	<field name="cor_id" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="pro_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_quantidade" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_data" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="cor_laudo" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="4" y="0" width="60" height="20" uuid="d6a5f3d7-e682-437a-81fe-d459f4160932"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cor_data}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="64" y="0" width="113" height="20" uuid="b02ee943-4f0c-4aaf-abb6-e1edd71a7454"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{pro_nome}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0">
+				<reportElement x="177" y="0" width="44" height="20" uuid="d44cbc3c-6e99-4abd-8fc8-d68464dd21d4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cor_quantidade}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
